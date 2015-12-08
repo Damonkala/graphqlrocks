@@ -11,22 +11,18 @@ class AppController extends React.Component {
     this.state = { bookmarks: [] };
   }
   insertBookmark(newBookmark) {
-    // API.saveBookmark(newBookmark)
-    //    .done(data => {
-    //          this.setState({
-    //            bookmarks: this.state.bookmarks.concat(data)
-    //     });
-    // });
-
-    // Save this new bookmark
+    API.saveBookmark(newBookmark)
+       .done(data => {
+             this.setState({
+               bookmarks: this.state.bookmarks.concat(data)
+        });
+    });
   }
   componentDidMount() {
-    // API.getAllBookmarks()
-    //    .done(data => {
-    //     this.setState({ bookmarks: data.links });
-    //   });
-
-    // Bring me all the links data
+    API.getAllBookmarks()
+       .done(data => {
+        this.setState({ bookmarks: data.links });
+    });
   }
   render() {
     return (
