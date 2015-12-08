@@ -23,6 +23,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 
+// mount a graphql endpoint
+// needs a schema
+
+import schema from "./data/schema";
+import GraphQLHTTP from "express-graphql";
+
+app.use("/graphql", GraphQLHTTP({
+  schema
+}));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
