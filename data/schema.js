@@ -41,6 +41,16 @@ let schema = new GraphQLSchema({
   query: new GraphQLObjectType({
     name: 'Query',
     fields: () => ({
+
+      square: {
+        type: GraphQLInt,
+        args: {
+          num: { type: GraphQLInt }
+        },
+        resolve: (_, {num}) => num * num
+      },
+
+
       allLinks: {
         type: new GraphQLList(linkType),
         resolve: () => links
