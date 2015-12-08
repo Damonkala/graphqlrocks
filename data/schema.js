@@ -11,8 +11,12 @@ import {
 
 var links = [
   {id: 1, title: "Google", url: "https://google.com"},
-  {id: 2, title: "Google1", url: "google1.com"},
-  {id: 3, title: "Google2", url: "google2.com"}
+  {id: 2, title: "Yahoo", url: "yahoo.com"},
+  {id: 3, title: "HP", url: "https://hp.com"},
+  {id: 4, title: "Dell", url: "https://dell.com"},
+  {id: 5, title: "GraphQL", url: "http://graphql.org"},
+  {id: 6, title: "React", url: "http://facebook.github.io/react"},
+  {id: 7, title: "Relay", url: "http://facebook.github.io/relay"}
 ];
 
 let linkType = new GraphQLObjectType({
