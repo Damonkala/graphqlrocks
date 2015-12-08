@@ -20,8 +20,8 @@ class AppController extends React.Component {
   }
   componentDidMount() {
     API.getAllBookmarks()
-       .done(data => {
-        this.setState({ bookmarks: data.links });
+       .done(resp => {
+        this.setState({ bookmarks: resp.data.bookmarks });
     });
   }
   render() {

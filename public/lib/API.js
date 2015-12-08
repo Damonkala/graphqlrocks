@@ -5,7 +5,18 @@ let API = {
     return post("/api/links", newBookmark);
   },
   getAllBookmarks() {
-    return get("/api/links");
+    // return get("/api/links");
+    return post("/graphql", {
+      query: `
+        {
+          bookmarks: allLinks {
+            id
+            title
+            url
+          }
+        }
+      `
+    })
   }
 };
 
