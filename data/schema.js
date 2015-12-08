@@ -25,7 +25,10 @@ let linkType = new GraphQLObjectType({
     id: { type: new GraphQLNonNull(GraphQLID) },
     title: {
       type: GraphQLString,
-      resolve: (obj) => obj.title
+      args: {
+        upcase: { type: GraphQLBoolean }
+      },
+      resolve: (obj, {upcase}) => upcase ? obj.title.toUpperCase() : obj.title
      },
     url: {
       type: GraphQLString,
@@ -40,11 +43,18 @@ let linkType = new GraphQLObjectType({
   })
 });
 
+
+let counter = 0;
+
 let schema = new GraphQLSchema({
   // top level fields
   query: new GraphQLObjectType({
     name: 'Query',
     fields: () => ({
+      counter: {
+        type: GraphQLInt,
+        resolve: () => counter
+      },
 
       square: {
         type: GraphQLInt,
@@ -67,7 +77,24 @@ let schema = new GraphQLSchema({
         resolve: () => links
       },
     })
+  }),
+
+  mutation: new GraphQLObjectType({
+    name: 'Mutation',
+    fields: () => ({
+      incrementCounter: {
+        type: GraphQLInt,
+        args: {
+          delta: {type: GraphQLInt}
+        },
+        resolve: (_, {delta}) => {
+          counter = counter + delta;
+          return counter;
+        }
+      },
+    })
   })
+
 });
 
 export default schema;
