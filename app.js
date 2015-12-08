@@ -30,7 +30,8 @@ import schema from "./data/schema";
 import GraphQLHTTP from "express-graphql";
 
 app.use("/graphql", GraphQLHTTP({
-  schema
+  schema,
+  graphiql: true
 }));
 
 // catch 404 and forward to error handler

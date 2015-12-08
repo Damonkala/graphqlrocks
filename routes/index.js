@@ -5,11 +5,7 @@ router.get('/express', function(req, res, next) {
   res.render('index', { title: 'React' });
 });
 
-var links = [
-  {id: 1, title: "Google", url: "google.com"},
-  {id: 2, title: "Google1", url: "google1.com"},
-  {id: 3, title: "Google2", url: "google2.com"}
-];
+
 
 // router.get('/api/links', function(req, res, next) {
 //    res.json({ links: links });
