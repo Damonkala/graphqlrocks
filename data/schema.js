@@ -54,6 +54,13 @@ let schema = new GraphQLSchema({
         resolve: (_, {num}) => num * num
       },
 
+      links: {
+        type: new GraphQLList(linkType),
+        args: {
+          first: { type: new GraphQLNonNull(GraphQLInt) }
+        },
+        resolve: (_, {first}) => links.slice(0, first)
+      },
 
       allLinks: {
         type: new GraphQLList(linkType),
