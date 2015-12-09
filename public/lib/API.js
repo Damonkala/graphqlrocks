@@ -2,10 +2,20 @@ import {get, post} from "jquery";
 
 let API = {
   saveBookmark(newBookmark) {
-    return post("/api/links", newBookmark);
+    return post("/graphql", {
+      query: `
+        mutation {
+          createLink(title: "${newBookmark.title}", url: "${newBookmark.url}") {
+            id
+            title
+            url
+            safe
+          }
+        }
+      `
+    })
   },
   getAllBookmarks() {
-    // return get("/api/links");
     return post("/graphql", {
       query: `
         {

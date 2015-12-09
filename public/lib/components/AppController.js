@@ -14,7 +14,7 @@ class AppController extends React.Component {
     API.saveBookmark(newBookmark)
        .done(data => {
              this.setState({
-               bookmarks: this.state.bookmarks.concat(data)
+               bookmarks: this.state.bookmarks.concat(data.data.createLink)
         });
     });
   }

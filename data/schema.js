@@ -92,9 +92,20 @@ let schema = new GraphQLSchema({
           return counter;
         }
       },
+      createLink: {
+        type: linkType,
+        args: {
+          title: {type: GraphQLString},
+          url: {type: GraphQLString},
+        },
+        resolve: (_, {title, url}) => {
+          let newLink = {title, url, id: Date.now()};
+          links.push(newLink);
+          return newLink;
+        }
+      }
     })
   })
-
 });
 
 export default schema;
