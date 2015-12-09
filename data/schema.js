@@ -9,20 +9,19 @@ import {
   GraphQLBoolean
 } from 'graphql';
 
-var links = [
-  {id: 1, title: "Google", url: "https://google.com"},
-  {id: 2, title: "Yahoo", url: "yahoo.com"},
-  {id: 3, title: "HP", url: "https://hp.com"},
-  {id: 4, title: "Dell", url: "https://dell.com"},
-  {id: 5, title: "GraphQL", url: "http://graphql.org"},
-  {id: 6, title: "React", url: "http://facebook.github.io/react"},
-  {id: 7, title: "Relay", url: "http://facebook.github.io/relay"}
-];
+import {MongoClient} from "mongodb";
+let db;
+
+MongoClient.connect(process.env.MONGO_URL, (err, database) => {
+  if (err) throw err;
+
+  db = database;
+})
 
 let linkType = new GraphQLObjectType({
   name: 'Link',
   fields: () => ({
-    id: { type: new GraphQLNonNull(GraphQLID) },
+    _id: { type: new GraphQLNonNull(GraphQLID) },
     title: {
       type: GraphQLString,
       args: {
@@ -69,12 +68,12 @@ let schema = new GraphQLSchema({
         args: {
           first: { type: new GraphQLNonNull(GraphQLInt) }
         },
-        resolve: (_, {first}) => links.slice(0, first)
+        resolve: (_, {first}) => db.collection("links").find({}).limit(first).toArray()
       },
 
       allLinks: {
         type: new GraphQLList(linkType),
-        resolve: () => links
+        resolve: () => db.collection("links").find({}).toArray()
       },
     })
   }),

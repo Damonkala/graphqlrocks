@@ -20,7 +20,7 @@ let API = {
       query: `
         {
           bookmarks: allLinks {
-            id
+            id: _id
             title
             url
           }
